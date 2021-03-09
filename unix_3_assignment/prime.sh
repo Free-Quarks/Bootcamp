@@ -3,7 +3,7 @@
 # this is the prime part of the unix 3 assignment
 # This is using the 6k+-1 Primality test
 
-echo "Enter number to test if prime:"
+# echo "Enter number to test if prime:"
 
 read num
 
