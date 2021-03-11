@@ -7,25 +7,25 @@
 
 read num
 
-if [[ $num -lt 3 ]]; then
-    echo "$num is a prime number"
+if [[ ${num} -lt 3 ]]; then
+    echo "${num} is a prime number"
 elif [[ $((num % 2)) -eq 0 || $((num % 3)) -eq 0 ]]; then
-    echo "$num is not a prime number"
+    echo "${num} is not a prime number"
 else
     i=5
     p=0
-    while [[ $((i**2)) -le $num ]] 
+    while [[ $((i**2)) -le ${num} ]] 
     do
         if [[ $((num % i)) -eq 0 || $((num % (i+2))) -eq 0 ]]; then
             echo "$num is not a prime number"
             p=1
-            i=$num
+            i=${num}
         else
             i=$((i+6))
         fi
     done
-    if [[ $p -eq 0 ]]; then
-        echo "$num is a prime number"
+    if [[ ${p} -eq 0 ]]; then
+        echo "${num} is a prime number"
     fi
 fi
 

@@ -7,13 +7,13 @@
 
 input="/home/lieffersj/Bootcamp/unix_3_assignment/integers.txt"
 
-read -r -d IFS -a integers < $input
+read -r -d IFS -a integers < ${input}
 
 for num in ${integers[*]}
 do
-    echo "$num" | ./prime.sh >> prime.out 2>> prime.err &
+    echo "${num}" | ./prime.sh >> prime.out 2>> prime.err &
     wait
-    echo "Exit status is: $?" >> prime.out
+    echo "Exit status is: $?" >> prime.err
 done
 
 echo "All integers tested" 
