@@ -21,10 +21,26 @@ int main( void )
 {
     // getting the input
     int y;
-    scanf("%d", &y);
-    // printing the result 
-    printf("Sum of digits = %d\n", sum_digits(y));
-    return 0;
+    char term;
+    // This checks if the input value is an integer or not. It doesn't work too
+    // well since if any integer is in the input it will read that as an input
+    // and still run, so only works for pure characters or strings
+    if (scanf("%d%c", &y, &term) == 2) {
+        // now to run some conditionals for error checking
+        if (y < 0) {
+            printf("ERROR: input value %d is not positive\n", y);
+            return 0;
+        }
+        else {
+            // printing the result 
+            printf("Sum of digits = %d\n", sum_digits(y));
+            return 0;
+        }
+    }
+    else {
+        printf("ERROR: Non-integer value in input\n");
+        return 1;
+    }
 }
 
 
