@@ -16,13 +16,15 @@
 
 // TODO: Impelement the following functions as part of your program.
 char *stripWd (char *wd);
-void chgLow(char *wd);
+void chgLow(char *ptr);
 void printWordCounts(char **wds, int sz);
 void sortList(char **wds, int sz);
 
 // NOTE: Use this function for debugging
 void printList(char **wds, int sz);
 
+// Additional functions implemented for code
+int read_words(char * wd, char **wdList);
 
 /**
  * The driver function. It reads input from stdin and calls functions to
@@ -34,12 +36,55 @@ void printList(char **wds, int sz);
  * @return Exit status code of 0
  */
 int main() {
+  char wds[MAX_WORD_LEN*MAX_NUM_WORDS] = {0};
   char wd[MAX_WORD_LEN] = {0};
   char *wdList[MAX_NUM_WORDS];
   char *ptr;
   int listSize = 0;
-  /* YOUR CODE HERE */
+  int i,j;
+
+  i = read_words(wds, *&wdList); // This reads in the whole file into wds and then breaks up the words by a " " delimiter 
+  // and puts them into the wdList, it returns the number of words as an integer i
+  printList(wdList, i);
+  
+  for(j=0; j<i; j++) {
+    ptr=*&wdList[j];
+    chgLow(ptr);
+    wdList[j]=ptr;
+  }
+
+  printList(wdList, i);
+
   return 0;
+}
+
+// this will open and read the test files into wd, and then puts them all into the word list
+int read_words(char * wds, char **wdList)
+{
+    // used for opening and reading file
+    FILE * fp;
+    int i=0;
+    const char s[2] = " ";
+    char *token;
+
+    // open file for reading
+    fp = fopen("/home/lieffersj/Bootcamp/c_assignments/c_assigment_3/tests/test06", "r");
+
+    // use fgets to read in the strings
+    fgets(wds, MAX_WORD_LEN , fp);
+
+    token = strtok(wds, s);
+
+    /* walk through other tokens */
+    while( token != NULL ) {
+      wdList[i]=token;
+      i+=1;
+      token = strtok(NULL, s);
+   }
+
+    // now to close the file
+    fclose(fp);
+    return i;
 }
 
 /**
@@ -57,9 +102,11 @@ char *stripWd (char *wd) {
  * This function changes all upper case letters in wd to lower case.
  * @param wd a pointer to the first character in wd
  */
-void chgLow(char *wd) {
-  char *ptr;
-  /* YOUR CODE HERE */
+void chgLow(char *ptr) {
+  char *ptr1;
+  *ptr1 = tolower(*ptr);
+  printf("%s\n", ptr1);
+  ptr = ptr1;
   return;
 }
 
